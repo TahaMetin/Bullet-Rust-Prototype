@@ -17,13 +17,23 @@ public class BigEnemyAI : Enemy
 
         ChaseClosestTarget();
     }
-    private void ChaseClosestTarget() // Call this function when position changed by pool
+    private void OnEnable() 
     {
-        // Start Coroutine with closest target
-        if (Vector3.Distance(gameObject.transform.position, target0.position) < Vector3.Distance(gameObject.transform.position, target1.position))
-            StartCoroutine(MoveToTarget(target0, speed));
-        else
-            StartCoroutine(MoveToTarget(target1, speed));
+        ChaseClosestTarget();
+    }
+    private void ChaseClosestTarget() // Start Coroutine with closest target
+    {
+        try
+        {
+            if (Vector3.Distance(gameObject.transform.position, target0.position) < Vector3.Distance(gameObject.transform.position, target1.position))
+                StartCoroutine(MoveToTarget(target0, speed));
+            else
+                StartCoroutine(MoveToTarget(target1, speed));
+        }
+        catch
+        {
+            Debug.Log("First run of OnEnable is earlyer than start. So first OnEnable is throwing a null expectation");
+        }
     }
     private void OnTriggerEnter(Collider other) // check if target reached
     {
@@ -31,7 +41,7 @@ public class BigEnemyAI : Enemy
         {
             isTargetReached = true;
             StopAllCoroutines();
-            StartCoroutine(MoveToTarget(PlayerController.Instance.gameObject.transform, speed));
+            StartCoroutine(MoveToTarget(PlayerController.Instance.transform, speed));
         }
     }
     

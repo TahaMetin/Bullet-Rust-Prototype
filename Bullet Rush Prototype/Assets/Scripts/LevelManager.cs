@@ -5,14 +5,9 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]GameObject pfBigEnemy, pfSimpleEnemy;
-    GameObject player, enemySpawnPointsGO;
+    [SerializeField]GameObject player, enemySpawnPointsGO, enemySceneContainer;
     List<Transform> enemySpawnPoints;
-    private void Awake()
-    {
-        player = GameObject.Find("Player");
-        enemySpawnPointsGO = GameObject.Find("Enemy Spawn Points");
-        
-    }
+
     private void Start()
     {
         enemySpawnPoints = new List<Transform>();
@@ -37,9 +32,12 @@ public class LevelManager : Singleton<LevelManager>
         {
             for (int j = 0; j < amount; j++)
             {
+                GameObject enemy;
                 if (j == 0)
-                    Instantiate(pfBigEnemy, enemySpawnPoints[i]);
-                Instantiate(pfSimpleEnemy, enemySpawnPoints[i]);
+                    enemy= Instantiate(pfBigEnemy, enemySpawnPoints[i]);
+                else
+                    enemy =Instantiate(pfSimpleEnemy, enemySpawnPoints[i]);
+                enemy.transform.parent = enemySceneContainer.transform;
             }
         }
     }

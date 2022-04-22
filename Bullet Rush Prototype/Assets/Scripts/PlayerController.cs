@@ -53,7 +53,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if(other.tag == "Enemy")
         {
-            UIManager.Instance.GetComponent<UIManager>().ShowLosePopup();
+            EventManager.Instance.lose.Invoke();
         }
     }
     private void Fire(GameObject spawnPoint,GameObject gunRotatePoint) 
