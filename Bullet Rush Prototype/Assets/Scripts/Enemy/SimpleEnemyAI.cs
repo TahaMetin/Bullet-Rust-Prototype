@@ -6,8 +6,6 @@ public class SimpleEnemyAI : Enemy
 {
     private void Start()
     {
-        StartCoroutine(MoveToTarget(PlayerController.Instance.gameObject.transform, speed));
+        StartCoroutine(MoveToTarget(PlayerController.Instance.transform, speed));
     }
-
-
 }
