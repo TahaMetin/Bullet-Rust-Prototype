@@ -2,38 +2,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
-    public float bulletSpeed = 10000f;
-    public GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet, managerScripts;
-    Touch touch;
+    public float bulletSpeed = 100f;
+    public GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet;
+    Vector2 startPos;
+    Vector2 direction;
+    float moveSpeed;
+    [SerializeField] float moveSpeedModifier =0.2f;
     private void Update()
     {
-        if(Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
-            touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Moved)
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
             {
-                float speedModifier = 0.01f;
-                transform.position = new Vector3(
-                    transform.position.x + touch.deltaPosition.x * speedModifier,
-                    transform.position.y,
-                    transform.position.z + touch.deltaPosition.y * speedModifier);
+                case TouchPhase.Began:
+                    startPos = touch.position;
+                    break;
+
+                case TouchPhase.Moved:
+                    // Determine direction by comparing the current touch position with the initial one
+                    direction = touch.position - startPos;
+                    // Determine moveSpeed by normalized magnitude of direction vector 
+                    moveSpeed = direction.normalized.magnitude * moveSpeedModifier;
+                    Move();
+                    break;
+
+                case TouchPhase.Stationary:
+                    // when touch is not moving but still exist
+                    Move();
+                    break;
+
+                case TouchPhase.Ended:
+                    // when touch ended set default values 
+                    moveSpeed = 0f;
+                    direction = Vector2.zero;
+                    break;
             }
         }
+    }
+
+    private void Move() // move accordingly to direction and moveSpeed
+    {
+        Vector3 directionVector3 = new Vector3(direction.x, 0f, direction.y);
+        transform.position = transform.position + directionVector3 * moveSpeed * Time.deltaTime;
     }
     private void OnTriggerEnter(Collider other) // detect enemy touch and finish game
     {
         if(other.tag == "Enemy")
         {
-            managerScripts.GetComponent<UIManager>().ShowLosePopup();
+            UIManager.Instance.GetComponent<UIManager>().ShowLosePopup();
         }
     }
     private void Fire(GameObject spawnPoint,GameObject gunRotatePoint) 
     {
-        Vector3 position = spawnPoint.GetComponent<Transform>().position;
-        Vector3 shootDirection = (position - gunRotatePoint.transform.position).normalized;
-        Rigidbody bulletClone = (Rigidbody)Instantiate(bullet.GetComponent<Rigidbody>(), position, transform.rotation);
+        Vector3 bulletSpawnPosition = spawnPoint.GetComponent<Transform>().position;
+        Vector3 shootDirection = (bulletSpawnPosition - gunRotatePoint.transform.position).normalized;
+        Rigidbody bulletClone = (Rigidbody)Instantiate(bullet.GetComponent<Rigidbody>(), bulletSpawnPosition, transform.rotation);
         bulletClone.velocity = shootDirection * bulletSpeed;
     }
 

@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigEnemyAI : MonoBehaviour
+public class BigEnemyAI : Enemy
 {
     /* The goal is arriving the target behind player and after that moving toward player
      */
-    GameObject player;
-    public float speed;
     bool isTargetReached;
+    Transform target0, target1;
     private void Start()
     {
-        player = GameObject.Find("Player");
-        GameObject target = GameObject.Find("BigEnemyTargets");
-        Transform target0 = target.transform.GetChild(0).GetComponent<Transform>();
-        Transform target1 = target.transform.GetChild(1).GetComponent<Transform>();
+        GameObject target = PlayerController.Instance.transform.GetChild(2).gameObject;     //"BigEnemyTargets"
+        target0 = target.transform.GetChild(0).GetComponent<Transform>();
+        target1 = target.transform.GetChild(1).GetComponent<Transform>();
         isTargetReached = false;
 
+        ChaseClosestTarget();
+    }
+    private void ChaseClosestTarget() // Call this function when position changed by pool
+    {
         // Start Coroutine with closest target
         if (Vector3.Distance(gameObject.transform.position, target0.position) < Vector3.Distance(gameObject.transform.position, target1.position))
             StartCoroutine(MoveToTarget(target0, speed));
@@ -29,16 +31,8 @@ public class BigEnemyAI : MonoBehaviour
         {
             isTargetReached = true;
             StopAllCoroutines();
-            StartCoroutine(MoveToTarget(player.transform, speed));
+            StartCoroutine(MoveToTarget(PlayerController.Instance.gameObject.transform, speed));
         }
     }
     
-    IEnumerator MoveToTarget(Transform target, float speedTranslation)
-    {
-        while (gameObject.transform.position != target.position)
-        {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.position, speedTranslation * Time.deltaTime);
-            yield return null;
-        }
-    }
 }

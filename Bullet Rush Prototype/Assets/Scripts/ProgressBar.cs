@@ -9,7 +9,6 @@ public class ProgressBar : MonoBehaviour
     public Image mask;
     public GameObject enemys;
     private bool isGameRunning;
-    public GameObject managers;
     private void Start()
     {
         SetMaxEnemyCount();
@@ -32,7 +31,7 @@ public class ProgressBar : MonoBehaviour
         if(current  == 0)  // if there is no enemy alive end the game
         {
             mask.fillAmount = 0f;
-            managers.GetComponent<UIManager>().ShowWinPopup();
+            UIManager.Instance.GetComponent<UIManager>().ShowWinPopup();
             isGameRunning = false;
         }
     }

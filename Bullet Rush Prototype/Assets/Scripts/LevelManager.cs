@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]GameObject pfBigEnemy, pfSimpleEnemy;
     GameObject player, enemySpawnPointsGO;
@@ -23,22 +23,19 @@ public class LevelManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        for (int i = 0; i < enemySpawnPoints.Count; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                if (j == 0)
-                    Instantiate(pfBigEnemy, enemySpawnPoints[i]);
-                Instantiate(pfSimpleEnemy, enemySpawnPoints[i]);
-            }
-        }
+        SpawnEnemys(2);
     }
 
     public void RestartLevel()
     {
+        SpawnEnemys(2);
+    }
+
+    private void SpawnEnemys(int amount)
+    {
         for (int i = 0; i < enemySpawnPoints.Count; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < amount; j++)
             {
                 if (j == 0)
                     Instantiate(pfBigEnemy, enemySpawnPoints[i]);

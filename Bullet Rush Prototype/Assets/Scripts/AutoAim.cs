@@ -42,10 +42,7 @@ public class AutoAim : MonoBehaviour
             {
                 currentTarget = null;
             }
-
         }
-
-        
     }
 
     IEnumerator FireCheck()
