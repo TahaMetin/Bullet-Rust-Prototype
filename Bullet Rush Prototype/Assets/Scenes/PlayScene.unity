@@ -1721,6 +1721,9 @@ MonoBehaviour:
   - tag: BigEnemy
     prefab: {fileID: 121520893248359201, guid: 66f795e28df0f0640869e1a2ea12435f, type: 3}
     size: 20
+  - tag: Bullet
+    prefab: {fileID: 7040776828623540939, guid: 18e97d564a5409541a26a5165e580590, type: 3}
+    size: 50
 --- !u!1 &1543874162
 GameObject:
   m_ObjectHideFlags: 0

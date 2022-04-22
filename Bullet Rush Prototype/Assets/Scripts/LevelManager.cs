@@ -36,7 +36,7 @@ public class LevelManager : Singleton<LevelManager>
                 if (j == 0)
                     PoolManager.Instance.SpawnFromPool("BigEnemy",enemySpawnPoints[i].position);
                 else
-                    PoolManager.Instance.SpawnFromPool("BigEnemy", enemySpawnPoints[i].position);
+                    PoolManager.Instance.SpawnFromPool("SimpleEnemy", enemySpawnPoints[i].position);
             }
         }
         // TODO: spawn enemys next to each other
