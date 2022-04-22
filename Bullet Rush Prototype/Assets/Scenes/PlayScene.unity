@@ -1609,6 +1609,7 @@ GameObject:
   - component: {fileID: 1499293329}
   - component: {fileID: 1499293331}
   - component: {fileID: 1499293332}
+  - component: {fileID: 1499293333}
   m_Layer: 0
   m_Name: Manager Scripts
   m_TagString: Untagged
@@ -1656,11 +1657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b808622077a53498e8ed6123381fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfBigEnemy: {fileID: 121520893248359201, guid: 66f795e28df0f0640869e1a2ea12435f, type: 3}
-  pfSimpleEnemy: {fileID: 3331407601647460914, guid: 2932a8eb41f2b324c8e9e3293b85a3cf, type: 3}
   player: {fileID: 291955517}
   enemySpawnPointsGO: {fileID: 2038628192}
-  enemySceneContainer: {fileID: 86244743}
 --- !u!114 &1499293332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,6 +1701,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1499293333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499293328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376b1e3cb4c95c347b45ed4de3f75445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySceneContainer: {fileID: 86244743}
+  pools:
+  - tag: SimpleEnemy
+    prefab: {fileID: 3331407601647460914, guid: 2932a8eb41f2b324c8e9e3293b85a3cf, type: 3}
+    size: 100
+  - tag: BigEnemy
+    prefab: {fileID: 121520893248359201, guid: 66f795e28df0f0640869e1a2ea12435f, type: 3}
+    size: 20
 --- !u!1 &1543874162
 GameObject:
   m_ObjectHideFlags: 0

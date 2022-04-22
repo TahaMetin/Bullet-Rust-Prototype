@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField]GameObject pfBigEnemy, pfSimpleEnemy;
-    [SerializeField]GameObject player, enemySpawnPointsGO, enemySceneContainer;
+    [SerializeField]GameObject player, enemySpawnPointsGO;
     List<Transform> enemySpawnPoints;
 
     private void Start()
@@ -19,11 +18,13 @@ public class LevelManager : Singleton<LevelManager>
     public void NextLevel()
     {
         SpawnEnemys(2);
+        ProgressBar.Instance.SetMaxEnemyCount();
     }
 
     public void RestartLevel()
     {
         SpawnEnemys(2);
+        ProgressBar.Instance.SetMaxEnemyCount();
     }
 
     private void SpawnEnemys(int amount)
@@ -32,13 +33,13 @@ public class LevelManager : Singleton<LevelManager>
         {
             for (int j = 0; j < amount; j++)
             {
-                GameObject enemy;
                 if (j == 0)
-                    enemy= Instantiate(pfBigEnemy, enemySpawnPoints[i]);
+                    PoolManager.Instance.SpawnFromPool("BigEnemy",enemySpawnPoints[i].position);
                 else
-                    enemy =Instantiate(pfSimpleEnemy, enemySpawnPoints[i]);
-                enemy.transform.parent = enemySceneContainer.transform;
+                    PoolManager.Instance.SpawnFromPool("BigEnemy", enemySpawnPoints[i].position);
             }
         }
+        // TODO: spawn enemys next to each other
     }
+
 }

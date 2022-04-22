@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1904
     height: 973
   m_ShowMode: 4
-  m_Title: Simulator
+  m_Title: Project
   m_RootView: {fileID: 9}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 0
 --- !u!114 &2
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 333, y: 271}
   m_MaxSize: {x: 14003, y: 10021}
   vertical: 0
-  controlID: 104
+  controlID: 17
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 881, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 102
+  controlID: 53
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,7 +226,7 @@ MonoBehaviour:
     y: 0
     width: 1904
     height: 973
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_MinSize: {x: 605, y: 492}
   m_MaxSize: {x: 14003, y: 14042}
   vertical: 1
-  controlID: 103
+  controlID: 138
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_MinSize: {x: 605, y: 221}
   m_MaxSize: {x: 12005, y: 4021}
   vertical: 0
-  controlID: 183
+  controlID: 139
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -348,8 +348,8 @@ MonoBehaviour:
     y: 0
     width: 756
     height: 541
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -475,13 +475,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Enemy
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Enemy
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projeler\Github\Bullet Rush prototype\Bullet-Rust-Prototype\Bullet
     Rush Prototype
@@ -491,7 +491,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 1e3f0000
     m_LastClickedID: 16158
-    m_ExpandedIDs: 000000000a3f00001a3f0000
+    m_ExpandedIDs: 00000000123f0000223f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -519,7 +519,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000a3f0000
+    m_ExpandedIDs: 00000000123f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -640,9 +640,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 503d0000
-      m_LastClickedID: 15696
-      m_ExpandedIDs: 52fbffff8a3d00008e3d0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 4cfbffffca3c0000d83c0000e03c0000e23c00004e3d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -702,9 +702,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 11.822275, y: 0.5, z: 40.432762}
+    m_Target: {x: 0, y: 0, z: -0.06}
     speed: 2
-    m_Value: {x: 11.822275, y: 0.5, z: 40.432762}
+    m_Value: {x: 0, y: 0, z: -0.06}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -755,9 +755,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.36015782, y: -0.5755818, z: 0.34422794, w: 0.6484591}
   m_Size:
-    m_Target: 5.137118
+    m_Target: 10
     speed: 2
-    m_Value: 5.137118
+    m_Value: 10
   m_Ortho:
     m_Target: 0
     speed: 2

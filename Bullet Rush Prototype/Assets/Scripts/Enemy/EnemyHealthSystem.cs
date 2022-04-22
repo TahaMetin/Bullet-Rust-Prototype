@@ -5,7 +5,14 @@ using UnityEngine;
 public class EnemyHealthSystem : MonoBehaviour
 {
     [SerializeField] int health;
-
+    string tag;
+    private void Start()
+    {
+        if (gameObject.GetComponent<BigEnemyAI>() != null)
+            tag = "BigEnemy";
+        else if (gameObject.GetComponent<SimpleEnemyAI>() != null)
+            tag = "SimpleEnemy";
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Bullet")
@@ -20,7 +27,8 @@ public class EnemyHealthSystem : MonoBehaviour
         health -= amount; // decrease health given amount
         if (IsDead()) // check if enemy dead
         {
-            Destroy(gameObject); // Destroy gameobject who attached this script
+            gameObject.SetActive(false);
+            PoolManager.Instance.poolDictionary[tag].Enqueue(gameObject);
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBar : MonoBehaviour
+public class ProgressBar : Singleton<ProgressBar>
 {
     public int max, current;
     public Image mask;
@@ -18,11 +18,18 @@ public class ProgressBar : MonoBehaviour
     {
         if (!isGameRunning)
             return;
-        current = enemys.transform.childCount; // set current enemy number
 
-        GetCurrentFill();
+        int activeEnemyCount = 0;
+        for (int i = 0; i < enemys.transform.childCount; i++)
+        {
+            if (enemys.transform.GetChild(i).gameObject.activeInHierarchy)
+                activeEnemyCount++;
+        }
+        current = activeEnemyCount; // set current active enemy number
+
+        SetCurrentFill();
     }
-    public void GetCurrentFill() 
+    public void SetCurrentFill() 
     {
         float fillAmount =1.0f - ((float)current / (float)max );
         mask.fillAmount = fillAmount;
@@ -37,7 +44,13 @@ public class ProgressBar : MonoBehaviour
 
     public void SetMaxEnemyCount()
     {
-        max = enemys.transform.childCount;
+        int activeEnemyCount = 0;
+        for (int i = 0; i < enemys.transform.childCount; i++)
+        {
+            if (enemys.transform.GetChild(i).gameObject.activeInHierarchy)
+                activeEnemyCount++;
+        }
+        max = activeEnemyCount;
         isGameRunning = true;
     }
 

@@ -32,6 +32,7 @@ public class BigEnemyAI : Enemy
         }
         catch
         {
+            // TODO: Find a better solition for first run or make it a function and call it when enabled
             Debug.Log("First run of OnEnable is earlyer than start. So first OnEnable is throwing a null expectation");
         }
     }
