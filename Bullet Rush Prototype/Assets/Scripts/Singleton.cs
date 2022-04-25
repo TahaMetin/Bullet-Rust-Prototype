@@ -3,7 +3,6 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     private static volatile T instance = null;
-
     public static T Instance
     {
         get

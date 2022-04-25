@@ -8,18 +8,18 @@ public class PlayerController : Singleton<PlayerController>
      * WARNING: Keep "BigEnemyTargets" gameobject at index 0. BigEnemyAI is taking targets with index
      */
 
-    public float bulletSpeed = 10f;
-    [SerializeField] GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet;
-    Vector2 startPos;
-    Vector2 direction;
-    float moveSpeed;
+    [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float moveSpeedModifier =0.02f;
-    PlayerAnimatorController playerAnimatorController;
+    [SerializeField] GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet;
+    Vector2 _startPos;
+    Vector2 _direction;
+    float _moveSpeed;
+    PlayerAnimatorController _playerAnimatorController;
 
     private void Start()
     {
-        playerAnimatorController = gameObject.GetComponent<PlayerAnimatorController>();
-        playerAnimatorController.SetIsMovingFalse();
+        _playerAnimatorController = gameObject.GetComponent<PlayerAnimatorController>();
+        _playerAnimatorController.SetIsMovingFalse();
     }
     private void Update()
     {
@@ -30,38 +30,34 @@ public class PlayerController : Singleton<PlayerController>
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    startPos = touch.position;
+                    _startPos = touch.position;
                     break;
-
                 case TouchPhase.Moved:
                     // Determine direction by comparing the current touch position with the initial one
-                    direction = touch.position - startPos;
+                    _direction = touch.position - _startPos;
                     // Determine moveSpeed by normalized magnitude of direction vector 
-                    moveSpeed = direction.normalized.magnitude * moveSpeedModifier;
+                    _moveSpeed = _direction.normalized.magnitude * moveSpeedModifier;
                     Move();
                     break;
-
                 case TouchPhase.Stationary:
                     // when touch is not moving but still exist
                     Move();
                     break;
-
                 case TouchPhase.Ended:
                     // when touch ended set default values 
-                    moveSpeed = 0f;
-                    direction = Vector2.zero;
-                    playerAnimatorController.SetIsMovingFalse();
+                    _moveSpeed = 0f;
+                    _direction = Vector2.zero;
+                    _playerAnimatorController.SetIsMovingFalse();
                     break;
             }
         }
     }
-
     private void Move() // move accordingly to direction and moveSpeed
     {
-        Vector3 directionVector3 = new Vector3(direction.x, 0f, direction.y);
-        transform.position = transform.position + directionVector3 * moveSpeed * Time.deltaTime;
+        Vector3 directionVector3 = new Vector3(_direction.x, 0f, _direction.y);
+        transform.position = transform.position + directionVector3 * _moveSpeed * Time.deltaTime;
         transform.LookAt(directionVector3);
-        playerAnimatorController.SetIsMovingTrue();
+        _playerAnimatorController.SetIsMovingTrue();
     }
     private void OnTriggerEnter(Collider other) // detect enemy touch and finish game
     {
@@ -77,7 +73,6 @@ public class PlayerController : Singleton<PlayerController>
         Rigidbody bulletClone = PoolManager.Instance.SpawnFromPool("Bullet", bulletSpawnPosition).GetComponent<Rigidbody>();
         bulletClone.velocity = shootDirection * bulletSpeed;
     }
-
     public void FireInRightGun()
     {
         Fire(bulletSpawnPoint0, gunRotatePoint0);
@@ -86,6 +81,4 @@ public class PlayerController : Singleton<PlayerController>
     {
         Fire(bulletSpawnPoint1, gunRotatePoint1);
     }
-
-    
 }

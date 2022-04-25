@@ -7,24 +7,22 @@ public class AutoAim : MonoBehaviour
     [SerializeField] float range;
     [SerializeField] GameObject player;
     [SerializeField] bool isThisRightGun;
-    GameObject currentGun;
-    GameObject currentTarget;
-    bool isTargetInRange;
-    PlayerController playerController;
-
-
+    GameObject _currentGun;
+    GameObject _currentTarget;
+    bool _isTargetInRange;
+    PlayerController _playerController;
     private void Start()
     {
-        isTargetInRange = false;
-        currentGun = gameObject;
-        playerController = player.GetComponent<PlayerController>();
+        _isTargetInRange = false;
+        _currentGun = gameObject;
+        _playerController = player.GetComponent<PlayerController>();
         StartCoroutine("FireCheck");
     }
     private void LateUpdate() // late update used for overriding animation. 
     {
         Collider[] colliderArray = Physics.OverlapSphere(transform.position,range);
         Vector3 distance = new Vector3(0,0,0);
-        isTargetInRange = false;
+        _isTargetInRange = false;
         foreach (Collider collider in colliderArray)
         {
             if (collider.tag == "Enemy")
@@ -33,44 +31,39 @@ public class AutoAim : MonoBehaviour
                 Vector3 newDistance = collider.transform.position - gameObject.transform.position;
                 if(newDistance.magnitude > distance.magnitude)
                 {
-                    currentTarget = collider.gameObject; // set current target
+                    _currentTarget = collider.gameObject; // set current target
                     AutoAiming();
-                    isTargetInRange = true;
+                    _isTargetInRange = true;
                 }
             }
             else
             {
-                currentTarget = null;
+                _currentTarget = null;
             }
         }
     }
-
     IEnumerator FireCheck()
     {
         for (; ; )
         {
-            if (isTargetInRange)
+            if (_isTargetInRange)
             {
                 if (isThisRightGun)
-                    playerController.FireInRightGun();
+                    _playerController.FireInRightGun();
                 else
-                    playerController.FireInLeftGun();
+                    _playerController.FireInLeftGun();
 
-                isTargetInRange = false;
+                _isTargetInRange = false;
             }
             yield return new WaitForSeconds(.1f);
         }
     }
-  
-
     private void AutoAiming()
     {
-        currentGun.transform.LookAt(currentTarget.transform);
+        _currentGun.transform.LookAt(_currentTarget.transform);
         if(isThisRightGun)
-            currentGun.transform.Rotate(0f, 90f, 0f);
+            _currentGun.transform.Rotate(0f, 90f, 0f); //adjust rotation for character shoulder
         else
-            currentGun.transform.Rotate(0f,-90f,0f);
+            _currentGun.transform.Rotate(0f,-90f,0f);
     }
-
-
 }

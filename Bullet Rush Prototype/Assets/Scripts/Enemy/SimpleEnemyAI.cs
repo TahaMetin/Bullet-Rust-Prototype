@@ -8,7 +8,6 @@ public class SimpleEnemyAI : Enemy
     {
         StartCoroutine(MoveToTarget(PlayerController.Instance.transform, speed));
     }
-
     private void OnEnable()
     {
         try

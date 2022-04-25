@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public readonly int damage = 100;
-    private readonly float dissappearDistance = 100f;
+    public int _damage = 100;
+    readonly float _dissappearDistance = 100f;
     private void FixedUpdate()
-    {
-        if(Vector3.Distance(gameObject.transform.position, PlayerController.Instance.transform.position) > dissappearDistance)
+    {   //dissappear after getting out of wiev range
+        if(Vector3.Distance(gameObject.transform.position, PlayerController.Instance.transform.position) > _dissappearDistance)
         {
             gameObject.SetActive(false);
             PoolManager.Instance.poolDictionary["Bullet"].Enqueue(gameObject);

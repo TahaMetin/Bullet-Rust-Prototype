@@ -6,16 +6,14 @@ public class BigEnemyAI : Enemy
 {
     /* The goal is arriving the target behind player and after that moving toward player
      */
-    bool isTargetReached;
-    Transform target0, target1;
+    bool _isTargetReached;
+    Transform _target0, _target1;
     private void Start()
     {
-
         GameObject target = PlayerController.Instance.transform.GetChild(0).gameObject;     //"BigEnemyTargets" keep this gameobject at top
-        target0 = target.transform.GetChild(0).GetComponent<Transform>();
-        target1 = target.transform.GetChild(1).GetComponent<Transform>();
-        isTargetReached = false;
-
+        _target0 = target.transform.GetChild(0).GetComponent<Transform>();
+        _target1 = target.transform.GetChild(1).GetComponent<Transform>();
+        _isTargetReached = false;
         ChaseClosestTarget();
     }
     private void OnEnable() 
@@ -26,10 +24,10 @@ public class BigEnemyAI : Enemy
     {
         try
         {
-            if (Vector3.Distance(gameObject.transform.position, target0.position) < Vector3.Distance(gameObject.transform.position, target1.position))
-                StartCoroutine(MoveToTarget(target0, speed));
+            if (Vector3.Distance(gameObject.transform.position, _target0.position) < Vector3.Distance(gameObject.transform.position, _target1.position))
+                StartCoroutine(MoveToTarget(_target0, speed));
             else
-                StartCoroutine(MoveToTarget(target1, speed));
+                StartCoroutine(MoveToTarget(_target1, speed));
         }
         catch
         {
@@ -41,7 +39,7 @@ public class BigEnemyAI : Enemy
     {
         if (other.gameObject.tag == "Target")
         {
-            isTargetReached = true;
+            _isTargetReached = true;
             StopAllCoroutines();
             StartCoroutine(MoveToTarget(PlayerController.Instance.transform, speed));
         }

@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class ProgressBar : Singleton<ProgressBar>
 {
-    public int max, current;
-    public Image mask;
-    public GameObject enemys;
-    private bool isGameRunning;
+    [SerializeField] Image mask;
+    [SerializeField] GameObject enemys;
     [SerializeField] GameObject numberOfRemainingEnemy_GO;
-    Text numberOfRemainingEnemy_Text;
+    Text _numberOfRemainingEnemy_Text;
+    bool _isGameRunning;
+    int _max, _current;
     private void Start()
     {
         SetMaxEnemyCount();
-        numberOfRemainingEnemy_Text = numberOfRemainingEnemy_GO.GetComponent<Text>();
+        _numberOfRemainingEnemy_Text = numberOfRemainingEnemy_GO.GetComponent<Text>();
     }
 
     private void Update()
     {
-        if (!isGameRunning)
+        if (!_isGameRunning)
             return;
 
         int activeEnemyCount = 0;
@@ -28,21 +28,21 @@ public class ProgressBar : Singleton<ProgressBar>
             if (enemys.transform.GetChild(i).gameObject.activeInHierarchy)
                 activeEnemyCount++;
         }
-        current = activeEnemyCount; // set current active enemy number
-        numberOfRemainingEnemy_Text.text = current.ToString();
+        _current = activeEnemyCount; // set current active enemy number
+        _numberOfRemainingEnemy_Text.text = _current.ToString();
         SetCurrentFill();
     }
     public void SetCurrentFill() 
     {
-        float fillAmount =1.0f - ((float)current / (float)max );
+        float fillAmount =1.0f - ((float)_current / (float)_max );
         mask.fillAmount = fillAmount;
         
-        if(current  == 0)  // if there is no enemy alive end the game
+        if(_current  == 0)  // if there is no enemy alive end the game
         {
-            numberOfRemainingEnemy_Text.text = current.ToString();
+            _numberOfRemainingEnemy_Text.text = _current.ToString();
             mask.fillAmount = 0f;
             EventManager.Instance.win.Invoke();
-            isGameRunning = false;
+            _isGameRunning = false;
         }
     }
 
@@ -54,8 +54,8 @@ public class ProgressBar : Singleton<ProgressBar>
             if (enemys.transform.GetChild(i).gameObject.activeInHierarchy)
                 activeEnemyCount++;
         }
-        max = activeEnemyCount;
-        isGameRunning = true;
+        _max = activeEnemyCount;
+        _isGameRunning = true;
     }
 
 }
