@@ -26,7 +26,17 @@ public class PoolManager : Singleton<PoolManager>
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
-                obj.transform.parent = enemySceneContainer.transform; // make enemys child of enemy container in scene
+                switch (pool.tag)
+                {
+                    case "SimpleEnemy":
+                    case "BigEnemy":
+                        obj.transform.parent = enemySceneContainer.transform; // make enemys child of enemy container in scene
+                        break;
+                    case "Bullet":
+                        break;
+                    default:
+                        break;
+                }
                 objectPool.Enqueue(obj);
             }
 

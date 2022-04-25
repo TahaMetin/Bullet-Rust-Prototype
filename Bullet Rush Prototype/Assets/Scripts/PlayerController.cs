@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    public float bulletSpeed = 100f;
-    public GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet;
+    public float bulletSpeed = 10f;
+    [SerializeField] GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet;
     Vector2 startPos;
     Vector2 direction;
     float moveSpeed;
-    [SerializeField] float moveSpeedModifier =0.2f;
+    [SerializeField] float moveSpeedModifier =0.02f;
+    PlayerAnimatorController playerAnimatorController;
+
+    private void Start()
+    {
+        playerAnimatorController = gameObject.GetComponent<PlayerAnimatorController>();
+        playerAnimatorController.SetIsMovingFalse();
+    }
     private void Update()
     {
         if (Input.touchCount > 0)
@@ -39,6 +46,7 @@ public class PlayerController : Singleton<PlayerController>
                     // when touch ended set default values 
                     moveSpeed = 0f;
                     direction = Vector2.zero;
+                    playerAnimatorController.SetIsMovingFalse();
                     break;
             }
         }
@@ -48,6 +56,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         Vector3 directionVector3 = new Vector3(direction.x, 0f, direction.y);
         transform.position = transform.position + directionVector3 * moveSpeed * Time.deltaTime;
+        transform.LookAt(directionVector3);
+        playerAnimatorController.SetIsMovingTrue();
     }
     private void OnTriggerEnter(Collider other) // detect enemy touch and finish game
     {
@@ -60,7 +70,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         Vector3 bulletSpawnPosition = spawnPoint.GetComponent<Transform>().position;
         Vector3 shootDirection = (bulletSpawnPosition - gunRotatePoint.transform.position).normalized;
-        Rigidbody bulletClone = (Rigidbody)Instantiate(bullet.GetComponent<Rigidbody>(), bulletSpawnPosition, transform.rotation);
+        Rigidbody bulletClone = PoolManager.Instance.SpawnFromPool("Bullet", bulletSpawnPosition).GetComponent<Rigidbody>();
         bulletClone.velocity = shootDirection * bulletSpeed;
     }
 

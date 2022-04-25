@@ -20,7 +20,7 @@ public class AutoAim : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         StartCoroutine("FireCheck");
     }
-    private void Update()
+    private void LateUpdate() // late update used for overriding animation. 
     {
         Collider[] colliderArray = Physics.OverlapSphere(transform.position,range);
         Vector3 distance = new Vector3(0,0,0);
@@ -66,6 +66,10 @@ public class AutoAim : MonoBehaviour
     private void AutoAiming()
     {
         currentGun.transform.LookAt(currentTarget.transform);
+        if(isThisRightGun)
+            currentGun.transform.Rotate(0f, 90f, 0f);
+        else
+            currentGun.transform.Rotate(0f,-90f,0f);
     }
 
 
