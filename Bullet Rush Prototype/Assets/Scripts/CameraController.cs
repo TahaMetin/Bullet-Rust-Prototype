@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 desiredPosition = new Vector3(transform.position.x, transform.position.y, player.position.z - followingDistance);
+        Vector3 desiredPosition = new Vector3(player.position.x, transform.position.y, player.position.z - followingDistance);
         Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothSpeed);
         transform.position = smoothedPosition;
     }

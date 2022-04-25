@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    /*
+     * WARNING: Keep "BigEnemyTargets" gameobject at index 0. BigEnemyAI is taking targets with index
+     */
+
     public float bulletSpeed = 10f;
     [SerializeField] GameObject gunRotatePoint0, gunRotatePoint1, bulletSpawnPoint0, bulletSpawnPoint1, bullet;
     Vector2 startPos;

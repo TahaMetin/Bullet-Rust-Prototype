@@ -10,7 +10,8 @@ public class BigEnemyAI : Enemy
     Transform target0, target1;
     private void Start()
     {
-        GameObject target = PlayerController.Instance.transform.GetChild(2).gameObject;     //"BigEnemyTargets"
+
+        GameObject target = PlayerController.Instance.transform.GetChild(0).gameObject;     //"BigEnemyTargets" keep this gameobject at top
         target0 = target.transform.GetChild(0).GetComponent<Transform>();
         target1 = target.transform.GetChild(1).GetComponent<Transform>();
         isTargetReached = false;
