@@ -10,8 +10,10 @@ public class Enemy : MonoBehaviour
         if (target == null)
             yield break;
         while (gameObject.transform.position != target.position)    // move to te target position until reach the position
-        {
+        {   // move to position
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.position, speedTranslation * Time.deltaTime);
+            // look to position
+            gameObject.transform.LookAt(target.position);
             yield return null;
         }
     }

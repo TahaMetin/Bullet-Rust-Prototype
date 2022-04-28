@@ -283,6 +283,18 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -654,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1492121441}
-  followingDistance: 15
+  followingDistance: 10
   smoothSpeed: 0.125
 --- !u!4 &495589092
 Transform:
@@ -664,7 +676,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495589090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 23.18, z: -20}
+  m_LocalPosition: {x: 0, y: 15.8, z: -15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -1582,7 +1594,7 @@ MonoBehaviour:
   enemySceneContainer: {fileID: 86244743}
   pools:
   - tag: SimpleEnemy
-    prefab: {fileID: 3331407601647460914, guid: 2932a8eb41f2b324c8e9e3293b85a3cf, type: 3}
+    prefab: {fileID: 4803014352389650695, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
     size: 100
   - tag: BigEnemy
     prefab: {fileID: 121520893248359201, guid: 66f795e28df0f0640869e1a2ea12435f, type: 3}
