@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
 {
-    /*  TODO: Add a shooting animation for making arm straight when shooting
+    /*  TODO: Add a shooting animation for making arm straight when shooting with isShooting veriable
      *  or disable arm animations. For better visual when running and shooting at the same time.
      */
     [SerializeField] Animator playerAnimator;
