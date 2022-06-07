@@ -5,7 +5,7 @@
 - Level system with scriptable objects
 - Singleton
 - OOP prenciples and clean code
-- Running directly to player and running to player from behind
+- Enemy AI and health system
 - UI controls with event system
 - Touch control
 - Animator controller
