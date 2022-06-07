@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Packed Assets
+  m_EditorClassIdentifier: 
+  m_GroupName: Packed Assets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c80397a23a0bc214f90f2623fb6334ad
+  m_SerializeEntries:
+  - m_GUID: 66f795e28df0f0640869e1a2ea12435f
+    m_Address: Assets/Prefabs/Big Enemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1dda678311603f145bcd8115006cbffd
+    m_Address: Assets/Metarials/Big Enemy.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 20c23591303a22142bdbf2c76748782b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 37c837fabc00c7549a84546d07b78f32, type: 2}
+    - {fileID: 11400000, guid: 4f88c105e8a65c34eb99b60e25b1542b, type: 2}
